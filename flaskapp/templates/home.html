@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="d-flex align-items-center justify-content-center row">
+  <table class="table table-striped readings">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Light Value</th>
+        <th scope="col">Soil Moisture Value</th>
+        <th scope="col">Temperature Value</th>
+        <th scope="col">Humidity Value</th>
+      </tr>
+    </thead>
+    {% for i in range(ids|length) %}
+    <tr style="color: white;">
+      <td>{{ ids[i] }}</td">
+      <td>{{ lightvalues[i] }}</td>
+      <td>{{ moisturevalues[i] }}</td>
+      <td>{{ tempvalues[i] }}</td>
+      <td>{{ humidityvalues[i] }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+<br>
+<br>
+<div class="d-flex align-items-center justify-content-center row">
+  <table class="table table-striped readings">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">CO2 Value</th>
+        <th scope="col">TVOC Value</th>
+      </tr>
+    </thead>
+    {% for i in range(ids|length) %}
+    <tr style="color: white;">
+      <td>{{ ids[i] }}</td">
+      <td>{{ CO2values[i] }}</td>
+      <td>{{ TVOCvalues[i] }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.js"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('.readings').DataTable({
+      "pageLength": 5,
+      "lengthChange": false,
+      // "info": false
+      "pagingType": "full"
+    });
+  });
+</script>
+{% endblock content %}
