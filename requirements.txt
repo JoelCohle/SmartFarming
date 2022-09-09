@@ -4,7 +4,6 @@ bcrypt==4.0.0
 blinker==1.4
 certifi==2020.6.20
 chardet==4.0.0
-chrome-gnome-shell==0.0.0
 click==8.0.3
 colorama==0.4.4
 command-not-found==0.3
@@ -87,7 +86,6 @@ rpm==4.17.0
 scikit-learn==1.1.2
 scipy==1.9.1
 SecretStorage==3.3.1
-sessioninstaller==0.0.0
 six==1.16.0
 sklearn==0.0
 SQLAlchemy==1.4.39
