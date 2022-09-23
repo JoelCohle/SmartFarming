@@ -6,6 +6,7 @@
     <thead class="thead-dark">
       <tr>
         <th scope="col">ID</th>
+        <th scope="col">Dates</th>
         <th scope="col">Light Value</th>
         <th scope="col">Soil Moisture Value</th>
         <th scope="col">Temperature Value</th>
@@ -15,6 +16,7 @@
     {% for i in range(ids|length) %}
     <tr style="color: white;">
       <td>{{ ids[i] }}</td">
+      <td>{{ dates[i] }}</td>
       <td>{{ lightvalues[i] }}</td>
       <td>{{ moisturevalues[i] }}</td>
       <td>{{ tempvalues[i] }}</td>
@@ -30,6 +32,7 @@
     <thead class="thead-dark">
       <tr>
         <th scope="col">ID</th>
+        <th scope="col">Dates</th>
         <th scope="col">CO2 Value</th>
         <th scope="col">TVOC Value</th>
       </tr>
@@ -37,6 +40,7 @@
     {% for i in range(ids|length) %}
     <tr style="color: white;">
       <td>{{ ids[i] }}</td">
+      <td>{{ dates[i] }}</td>
       <td>{{ CO2values[i] }}</td>
       <td>{{ TVOCvalues[i] }}</td>
     </tr>
@@ -50,7 +54,7 @@
 <script type="text/javascript">
   $(document).ready(function () {
     $('.readings').DataTable({
-      "pageLength": 5,
+      "pageLength": 3,
       "lengthChange": false,
       // "info": false
       "pagingType": "full"

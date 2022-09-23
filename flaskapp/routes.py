@@ -3,6 +3,7 @@ from flaskapp.forms import LoginForm
 from flaskapp.models import Admin
 from flaskapp import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
+from dateutil import parser
 import urllib.request, json
 
 import os
@@ -14,36 +15,45 @@ Admins = [
     }
 ]
 
-lighturl = "https://api.thingspeak.com/channels/1837535/fields/1.json?api_key=17B4FANCL381KHZE&results=30"
-moistureurl = "https://api.thingspeak.com/channels/1837535/fields/2.json?api_key=17B4FANCL381KHZE&results=30"
-tempurl = "https://api.thingspeak.com/channels/1837535/fields/3.json?api_key=17B4FANCL381KHZE&results=30"
-humidityurl = "https://api.thingspeak.com/channels/1837535/fields/4.json?api_key=17B4FANCL381KHZE&results=30"
-CO2url = "https://api.thingspeak.com/channels/1837535/fields/5.json?api_key=17B4FANCL381KHZE&results=30"
-TVOCurl = "https://api.thingspeak.com/channels/1837535/fields/6.json?api_key=17B4FANCL381KHZE&results=30"
+lighturl = "https://api.thingspeak.com/channels/1837535/fields/1.json?api_key=17B4FANCL381KHZE&average=1&results=50"
+moistureurl = "https://api.thingspeak.com/channels/1837535/fields/2.json?api_key=17B4FANCL381KHZE&average=1&results=50"
+tempurl = "https://api.thingspeak.com/channels/1837535/fields/3.json?api_key=17B4FANCL381KHZE&average=1&results=50"
+humidityurl = "https://api.thingspeak.com/channels/1837535/fields/4.json?api_key=17B4FANCL381KHZE&average=1&results=50"
+CO2url = "https://api.thingspeak.com/channels/1837535/fields/5.json?api_key=17B4FANCL381KHZE&average=1&results=50"
+TVOCurl = "https://api.thingspeak.com/channels/1837535/fields/6.json?api_key=17B4FANCL381KHZE&average=1&results=50"
 lightvalues = json.loads(urllib.request.urlopen(lighturl).read())
 moisturevalues = json.loads(urllib.request.urlopen(moistureurl).read())
 tempvalues = json.loads(urllib.request.urlopen(tempurl).read())
 humidityvalues = json.loads(urllib.request.urlopen(humidityurl).read())
 CO2values = json.loads(urllib.request.urlopen(CO2url).read())
 TVOCvalues = json.loads(urllib.request.urlopen(TVOCurl).read())
-ids = [val["entry_id"] for val in lightvalues["feeds"]]
-light = [val["field1"] for val in lightvalues["feeds"]]
-moisture = [val["field2"] for val in moisturevalues["feeds"]]
-temperature = [val["field3"] for val in tempvalues["feeds"]]
-humidity = [val["field4"] for val in humidityvalues["feeds"]]
-co2 = [val["field5"] for val in CO2values["feeds"]]
-tvoc = [val["field6"] for val in TVOCvalues["feeds"]]
+
+ids = [val+1 for val in range(len(lightvalues["feeds"]))]
+# create a list of dates
+dates = [parser.parse(val["created_at"]) for val in lightvalues["feeds"] if val["field1"] is not None]
+light = [val["field1"] for val in lightvalues["feeds"] if val["field1"] is not None]
+moisture = [val["field2"] for val in moisturevalues["feeds"] if val["field2"] is not None]
+temperature = [val["field3"] for val in tempvalues["feeds"] if val["field3"] is not None]
+humidity = [val["field4"] for val in humidityvalues["feeds"] if val["field4"] is not None ]
+co2 = [val["field5"] for val in CO2values["feeds"] if val["field5"] is not None ]
+tvoc = [val["field6"] for val in TVOCvalues["feeds"] if val["field6"] is not None]
 
 @app.route('/')
 @app.route("/home")
 @login_required
 def home():
-    return render_template('home.html', ids=ids , lightvalues=light, moisturevalues=moisture, tempvalues=temperature, humidityvalues=humidity, CO2values=co2, TVOCvalues=tvoc)
+    return render_template('home.html', ids=ids, dates=dates , lightvalues=light, moisturevalues=moisture, tempvalues=temperature, humidityvalues=humidity, CO2values=co2, TVOCvalues=tvoc)
 
 @app.route('/graph')
 @login_required
 def graph():
-    return render_template('graph.html', ids=ids , lightvalues=light, moisturevalues=moisture, tempvalues=temperature, humidityvalues=humidity, CO2values=co2, TVOCvalues=tvoc )
+    return render_template('graph.html', ids=ids, dates=dates , lightvalues=light, moisturevalues=moisture, tempvalues=temperature, humidityvalues=humidity, CO2values=co2, TVOCvalues=tvoc )
+
+
+@app.route('/analysis')
+@login_required
+def analysis():
+    return render_template('analysis.html', ids=ids , lightvalues=light, moisturevalues=moisture, tempvalues=temperature, humidityvalues=humidity, CO2values=co2, TVOCvalues=tvoc )
 
 
 @app.route("/login", methods=['GET', 'POST'])
