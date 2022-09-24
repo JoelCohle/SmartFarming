@@ -1,0 +1,127 @@
+body {
+  background-color: #2F3242;
+}
+svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -250px;
+  margin-left: -400px;
+}
+.message-box {
+  height: 200px;
+  width: 380px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: 50px;
+  color: #FFF;
+  /* font-family: Roboto; */
+  font-weight: 400;
+}
+.message-box h1 {
+  font-size: 30px;
+  line-height: 46px;
+  margin-bottom: 40px;
+}
+.buttons-con .action-link-wrap {
+  margin-top: 40px;
+}
+.buttons-con .action-link-wrap a {
+  background: #68c950;
+  padding: 8px 25px;
+  border-radius: 4px;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 14px;
+  transition: all 0.3s linear;
+  cursor: pointer;
+  text-decoration: none;
+  margin-right: 10px
+}
+.buttons-con .action-link-wrap a:hover {
+  background: #5A5C6C;
+  color: #fff;
+}
+
+#Polygon-1 , #Polygon-2 , #Polygon-3 , #Polygon-4 , #Polygon-4, #Polygon-5 {
+  animation: float 1s infinite ease-in-out alternate;
+}
+#Polygon-2 {
+  animation-delay: .2s; 
+}
+#Polygon-3 {
+  animation-delay: .4s; 
+}
+#Polygon-4 {
+  animation-delay: .6s; 
+}
+#Polygon-5 {
+  animation-delay: .8s; 
+}
+
+@keyframes float {
+  100% {
+    transform: translateY(20px);
+  }
+}
+@media (max-width: 450px) {
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -250px;
+    margin-left: -190px;
+  }
+}body {
+	 background-color: #fedf9e;
+	 color: #000;
+	 font-family: 'Avenir Next', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+	 font-size: 18px;
+	 font-weight: 400;
+	 line-height: 1.8;
+}
+ img {
+	 height: auto;
+	 max-width: 100%;
+}
+ nav a {
+	 color: black;
+	 display: inline-block;
+	 margin: 0 4px;
+	 text-decoration: none;
+}
+ nav a:first-child {
+	 margin: 0 4px 0 0;
+}
+ main {
+	 margin: 0 5%;
+}
+ .home-page {
+	 display: grid;
+	 font-size: 24px;
+	 grid-template-columns: 50% 50%;
+	 line-height: 1.4;
+	 margin: 2em auto 0 auto;
+	 max-width: 45em;
+	 padding: 0;
+}
+ .home-page h1 {
+	 font-size: 1em;
+	 margin: 4em 0 0 0;
+}
+ .home-page .button {
+	 margin: 1em 0;
+}
+ footer {
+	 background-color: #000;
+	 color: rgba(255, 255, 255, 0.6);
+	 padding: 5%;
+}
+ @media screen and (max-width: 45em) {
+	 .home-page {
+		 display: block;
+	}
+}
+ 

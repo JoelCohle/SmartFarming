@@ -15,45 +15,69 @@ Admins = [
     }
 ]
 
-lighturl = "https://api.thingspeak.com/channels/1837535/fields/1.json?api_key=17B4FANCL381KHZE&average=1&results=50"
-moistureurl = "https://api.thingspeak.com/channels/1837535/fields/2.json?api_key=17B4FANCL381KHZE&average=1&results=50"
-tempurl = "https://api.thingspeak.com/channels/1837535/fields/3.json?api_key=17B4FANCL381KHZE&average=1&results=50"
-humidityurl = "https://api.thingspeak.com/channels/1837535/fields/4.json?api_key=17B4FANCL381KHZE&average=1&results=50"
-CO2url = "https://api.thingspeak.com/channels/1837535/fields/5.json?api_key=17B4FANCL381KHZE&average=1&results=50"
-TVOCurl = "https://api.thingspeak.com/channels/1837535/fields/6.json?api_key=17B4FANCL381KHZE&average=1&results=50"
-lightvalues = json.loads(urllib.request.urlopen(lighturl).read())
-moisturevalues = json.loads(urllib.request.urlopen(moistureurl).read())
-tempvalues = json.loads(urllib.request.urlopen(tempurl).read())
-humidityvalues = json.loads(urllib.request.urlopen(humidityurl).read())
-CO2values = json.loads(urllib.request.urlopen(CO2url).read())
-TVOCvalues = json.loads(urllib.request.urlopen(TVOCurl).read())
+healthylighturl = "https://api.thingspeak.com/channels/1837535/fields/1.json?api_key=17B4FANCL381KHZE&average=30&days=5&start=2022-09-22%2014:00:00&end=2022-09-23%2010:00:00&round=2"
+healthymoistureurl = "https://api.thingspeak.com/channels/1837535/fields/2.json?api_key=17B4FANCL381KHZE&average=30&days=5&start=2022-09-22%2014:00:00&end=2022-09-23%2010:00:00&round=2"
+healthytempurl = "https://api.thingspeak.com/channels/1837535/fields/3.json?api_key=17B4FANCL381KHZE&average=30&days=5&start=2022-09-22%2014:00:00&end=2022-09-23%2010:00:00&round=2"
+healthyhumidityurl = "https://api.thingspeak.com/channels/1837535/fields/4.json?api_key=17B4FANCL381KHZE&average=30&days=5&start=2022-09-22%2014:00:00&end=2022-09-23%2010:00:00&round=2"
+healthyCO2url = "https://api.thingspeak.com/channels/1837535/fields/5.json?api_key=17B4FANCL381KHZE&average=30&days=5&start=2022-09-22%2014:00:00&end=2022-09-23%2010:00:00&round=2"
+healthyTVOCurl = "https://api.thingspeak.com/channels/1837535/fields/6.json?api_key=17B4FANCL381KHZE&average=30&days=5&start=2022-09-22%2014:00:00&end=2022-09-23%2010:00:00&round=2"
+deceasedlighturl = "https://api.thingspeak.com/channels/1837535/fields/1.json?api_key=17B4FANCL381KHZE&average=30&days=5&start=2022-09-23%2012:00:00&end=2022-09-24%2010:00:00&round=2"
+deceasedmoistureurl = "https://api.thingspeak.com/channels/1837535/fields/2.json?api_key=17B4FANCL381KHZE&average=30&days=5&start=2022-09-23%2012:00:00&end=2022-09-24%2010:00:00&round=2"
+deceasedtempurl = "https://api.thingspeak.com/channels/1837535/fields/3.json?api_key=17B4FANCL381KHZE&average=30&days=5&start=2022-09-23%2012:00:00&end=2022-09-24%2010:00:00&round=2"
+deceasedhumidityurl = "https://api.thingspeak.com/channels/1837535/fields/4.json?api_key=17B4FANCL381KHZE&average=30&days=5&start=2022-09-23%2012:00:00&end=2022-09-24%2010:00:00&round=2"
+deceasedCO2url = "https://api.thingspeak.com/channels/1837535/fields/5.json?api_key=17B4FANCL381KHZE&average=30&days=5&start=2022-09-23%2012:00:00&end=2022-09-24%2010:00:00&round=2"
+deceasedTVOCurl = "https://api.thingspeak.com/channels/1837535/fields/6.json?api_key=17B4FANCL381KHZE&average=30&days=5&start=2022-09-23%2012:00:00&end=2022-09-24%2010:00:00&round=2"
+healthylightvalues = json.loads(urllib.request.urlopen(healthylighturl).read())
+healthymoisturevalues = json.loads(urllib.request.urlopen(healthymoistureurl).read())
+healthytempvalues = json.loads(urllib.request.urlopen(healthytempurl).read())
+healthyhumidityvalues = json.loads(urllib.request.urlopen(healthyhumidityurl).read())
+healthyCO2values = json.loads(urllib.request.urlopen(healthyCO2url).read())
+healthyTVOCvalues = json.loads(urllib.request.urlopen(healthyTVOCurl).read())
+deceasedlightvalues = json.loads(urllib.request.urlopen(deceasedlighturl).read())
+deceasedmoisturevalues = json.loads(urllib.request.urlopen(deceasedmoistureurl).read())
+deceasedtempvalues = json.loads(urllib.request.urlopen(deceasedtempurl).read())
+deceasedhumidityvalues = json.loads(urllib.request.urlopen(deceasedhumidityurl).read())
+deceasedCO2values = json.loads(urllib.request.urlopen(deceasedCO2url).read())
+deceasedTVOCvalues = json.loads(urllib.request.urlopen(deceasedTVOCurl).read())
 
-ids = [val+1 for val in range(len(lightvalues["feeds"]))]
+ids = [val+1 for val in range(len(healthylightvalues["feeds"]))]
 # create a list of dates
-dates = [parser.parse(val["created_at"]) for val in lightvalues["feeds"] if val["field1"] is not None]
-light = [val["field1"] for val in lightvalues["feeds"] if val["field1"] is not None]
-moisture = [val["field2"] for val in moisturevalues["feeds"] if val["field2"] is not None]
-temperature = [val["field3"] for val in tempvalues["feeds"] if val["field3"] is not None]
-humidity = [val["field4"] for val in humidityvalues["feeds"] if val["field4"] is not None ]
-co2 = [val["field5"] for val in CO2values["feeds"] if val["field5"] is not None ]
-tvoc = [val["field6"] for val in TVOCvalues["feeds"] if val["field6"] is not None]
+healthydates = [parser.parse(val["created_at"]) for val in healthylightvalues["feeds"] if val["field1"] is not None]
+healthylight = [val["field1"] for val in healthylightvalues["feeds"] if val["field1"] is not None]
+healthymoisture = [val["field2"] for val in healthymoisturevalues["feeds"] if val["field2"] is not None]
+healthytemperature = [val["field3"] for val in healthytempvalues["feeds"] if val["field3"] is not None]
+healthyhumidity = [val["field4"] for val in healthyhumidityvalues["feeds"] if val["field4"] is not None ]
+healthyco2 = [val["field5"] for val in healthyCO2values["feeds"] if val["field5"] is not None ]
+healthytvoc = [val["field6"] for val in healthyTVOCvalues["feeds"] if val["field6"] is not None]
+deceaseddates = [parser.parse(val["created_at"]) for val in deceasedlightvalues["feeds"] if val["field1"] is not None]
+deceasedlight = [val["field1"] for val in deceasedlightvalues["feeds"] if val["field1"] is not None]
+deceasedmoisture = [val["field2"] for val in deceasedmoisturevalues["feeds"] if val["field2"] is not None]
+deceasedtemperature = [val["field3"] for val in deceasedtempvalues["feeds"] if val["field3"] is not None]
+deceasedhumidity = [val["field4"] for val in deceasedhumidityvalues["feeds"] if val["field4"] is not None ]
+deceasedco2 = [val["field5"] for val in deceasedCO2values["feeds"] if val["field5"] is not None ]
+deceasedtvoc = [val["field6"] for val in deceasedTVOCvalues["feeds"] if val["field6"] is not None]
 
 @app.route('/')
 @app.route("/home")
 @login_required
 def home():
-    return render_template('home.html', ids=ids, dates=dates , lightvalues=light, moisturevalues=moisture, tempvalues=temperature, humidityvalues=humidity, CO2values=co2, TVOCvalues=tvoc)
+    return render_template('home.html')
+
+@app.route("/table")
+@login_required
+def table():
+    return render_template('table.html', ids=ids, dates=healthydates, lightvalues=healthylight, moisturevalues=healthymoisture, tempvalues=healthytemperature, humidityvalues=healthyhumidity, CO2values=healthyco2, TVOCvalues=healthytvoc)
 
 @app.route('/graph')
 @login_required
 def graph():
-    return render_template('graph.html', ids=ids, dates=dates , lightvalues=light, moisturevalues=moisture, tempvalues=temperature, humidityvalues=humidity, CO2values=co2, TVOCvalues=tvoc )
+    return render_template('graph.html', ids=ids, dates=healthydates, healthylightvalues=healthylight, deceasedlightvalues=deceasedlight, moisturevalues=healthymoisture, tempvalues=healthytemperature, humidityvalues=healthyhumidity, healthyCO2values=healthyco2, deceasedCO2values=deceasedco2, healthyTVOCvalues=healthytvoc, deceasedTVOCvalues=deceasedtvoc )
 
 
 @app.route('/analysis')
 @login_required
 def analysis():
-    return render_template('analysis.html', ids=ids , lightvalues=light, moisturevalues=moisture, tempvalues=temperature, humidityvalues=humidity, CO2values=co2, TVOCvalues=tvoc )
+    return render_template('analysis.html', ids=ids , healthymoisturevalues=healthymoisture, deceasedmoisturevalues=deceasedmoisture, healthytempvalues=healthytemperature, deceasedtempvalues=deceasedtemperature, healthyhumidityvalues=healthyhumidity, deceasedhumidityvalues=deceasedhumidity)
 
 
 @app.route("/login", methods=['GET', 'POST'])

@@ -1,64 +1,23 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<div class="d-flex align-items-center justify-content-center row">
-  <table class="table table-striped readings">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Dates</th>
-        <th scope="col">Light Value</th>
-        <th scope="col">Soil Moisture Value</th>
-        <th scope="col">Temperature Value</th>
-        <th scope="col">Humidity Value</th>
-      </tr>
-    </thead>
-    {% for i in range(ids|length) %}
-    <tr style="color: white;">
-      <td>{{ ids[i] }}</td">
-      <td>{{ dates[i] }}</td>
-      <td>{{ lightvalues[i] }}</td>
-      <td>{{ moisturevalues[i] }}</td>
-      <td>{{ tempvalues[i] }}</td>
-      <td>{{ humidityvalues[i] }}</td>
-    </tr>
-    {% endfor %}
-  </table>
-</div>
-<br>
-<br>
-<div class="d-flex align-items-center justify-content-center row">
-  <table class="table table-striped readings">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Dates</th>
-        <th scope="col">CO2 Value</th>
-        <th scope="col">TVOC Value</th>
-      </tr>
-    </thead>
-    {% for i in range(ids|length) %}
-    <tr style="color: white;">
-      <td>{{ ids[i] }}</td">
-      <td>{{ dates[i] }}</td>
-      <td>{{ CO2values[i] }}</td>
-      <td>{{ TVOCvalues[i] }}</td>
-    </tr>
-    {% endfor %}
-  </table>
-</div>
+<head>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css') }}">
+</head>
 
-<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.js"></script>
-<script type="text/javascript">
-  $(document).ready(function () {
-    $('.readings').DataTable({
-      "pageLength": 3,
-      "lengthChange": false,
-      // "info": false
-      "pagingType": "full"
-    });
-  });
-</script>
+<svg width="380px" height="500px" viewBox="0 0 837 1045" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <path d="M353,9 L626.664028,170 L626.664028,487 L353,642 L79.3359724,487 L79.3359724,170 L353,9 Z" id="Polygon-1" stroke="#007FB2" stroke-width="6" sketch:type="MSShapeGroup"></path>
+        <path d="M78.5,529 L147,569.186414 L147,648.311216 L78.5,687 L10,648.311216 L10,569.186414 L78.5,529 Z" id="Polygon-2" stroke="#EF4A5B" stroke-width="6" sketch:type="MSShapeGroup"></path>
+        <path d="M773,186 L827,217.538705 L827,279.636651 L773,310 L719,279.636651 L719,217.538705 L773,186 Z" id="Polygon-3" stroke="#795D9C" stroke-width="6" sketch:type="MSShapeGroup"></path>
+        <path d="M639,529 L773,607.846761 L773,763.091627 L639,839 L505,763.091627 L505,607.846761 L639,529 Z" id="Polygon-4" stroke="#F2773F" stroke-width="6" sketch:type="MSShapeGroup"></path>
+        <path d="M281,801 L383,861.025276 L383,979.21169 L281,1037 L179,979.21169 L179,861.025276 L281,801 Z" id="Polygon-5" stroke="#36B455" stroke-width="6" sketch:type="MSShapeGroup"></path>
+    </g>
+</svg>
+<div class="message-box">
+  <!-- <h1>Smart Farming using IoT</h1> -->
+  <p style="text-align:left;"> The implementation of an IoT system in agriculture can make it much more effective in India, as it a sector that provides majority of employment to citizens in India. Hence, optimizing the use of resources will save a lot of time and also reduce the damage to the environment. </p>
+  <p style="text-align:left;">The system sense VOCs for accurately predicting onset of pathogen attack on the plant. This will help to more precisely control the spread of the pathogen by using minimal amount of pesticide on the target area.</p>
+</div>
 {% endblock content %}
+

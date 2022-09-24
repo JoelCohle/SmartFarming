@@ -63,7 +63,9 @@
       <ul>
       {% if current_user.is_authenticated %}
         <li><a href="{{ url_for('home') }}" style="--i: 0.05s;">Home</a> </li>
-        <li><a href="{{ url_for('graph') }}" style="--i: 0.05s;">Graphs</a> </li>
+        <li><a href="{{ url_for('table') }}" style="--i: 0.05s;">Tables</a> </li>
+        <li><a href="{{ url_for('graph') }}" style="--i: 0.05s;">LCT Graphs</a> </li>
+        <li><a href="{{ url_for('analysis') }}" style="--i: 0.05s;">THM Graphs</a> </li>
         <li><a href="{{ url_for('logout') }}" style="--i: 0.1s;">Logout</a></li>
       {% else %}
         <li> <a href="{{ url_for('login') }}" style="--i: 0.2s;">Login</a> </li>

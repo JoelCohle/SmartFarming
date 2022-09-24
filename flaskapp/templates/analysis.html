@@ -1,17 +1,17 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class = "d-flex justify-content-center">
-    <div class="row">Light Values
-        <div class="col"><canvas id="light_graph" width="400" height="300"></canvas>Moisture Values</div>
-        <div class="col"><canvas id="moisture_graph" width="400" height="300"> </canvas></div>
+    <div class="row">
+        <div class="col"><canvas id="moisture_graph" width="400" height="300"> </canvas>Soil Moisture Values</div>
+        <div class="col"><canvas id="deceasedmoisture_graph" width="400" height="300"></canvas></div>
     </div>
-    <div class="row">Temperature Values
-        <div class="col"><canvas id="temperature_graph" width="400" height="300"></canvas>Humidity Values</div>
-        <div class="col"><canvas id="humidity_graph" width="400" height="300"> </canvas></div>
+    <div class="row">
+        <div class="col"><canvas id="temperature_graph" width="400" height="300"></canvas>Temperature Values</div>
+        <div class="col"><canvas id="deceasedtemperature_graph" width="400" height="300"></canvas></div>
     </div>
-    <div class="row">CO2 Values
-        <div class="col"><canvas id="co2_graph" width="400" height="300"></canvas>TVOC Values</div>
-        <div class="col"><canvas id="tvoc_graph" width="400" height="300"></canvas></div>
+    <div class="row">
+        <div class="col"><canvas id="humidity_graph" width="400" height="300"> </canvas>Humidity Values</div>
+        <div class="col"><canvas id="deceasedhumidity_graph" width="400" height="300"> </canvas></div>
     </div>
 </div>
 <script>
@@ -25,38 +25,6 @@
     Chart.defaults.global.responsive = false;
     Chart.defaults.global.scaleLineColor = "white";
     Chart.defaults.global.scaleFontSize = 16;
-
-    // Light chart data
-    var lightData = {
-        labels: [
-            {% for item in ids %}
-    "{{ item }}",
-        {% endfor %}
-            ],
-
-    datasets: [{
-        fillColor: "rgba(151,187,205,0.2)",
-        strokeColor: "rgba(151,187,205,1)",
-        pointColor: "rgba(151,187,205,1)",
-        pointStrokeColor: "#fff",
-        pointHighlightFill: "#fff",
-        color: "white",
-        pointHighlightStroke: "rgba(151,187,205,1)",
-        bezierCurve: false,
-        data: [
-            {% for item in lightvalues %}
-                {{ item }},
-            {% endfor %}]
-        }]
-    }
-
-    // get bar chart canvas
-    var lightchart = document.getElementById("light_graph").getContext("2d");
-
-    steps = 10
-    max = 500
-    // draw bar chart
-    var LightChart = new Chart(lightchart).Line(lightData, { scaleOverride: true, scaleSteps: steps, scaleStepWidth: Math.ceil(max / steps), scaleStartValue: 0, scaleShowVerticalLines: true, barShowStroke: true, scaleShowLabels: true });
 
     //////////////////////////////////////////////////////////////
     // Soil Moisture chart data
@@ -76,7 +44,7 @@
         pointHighlightStroke: "rgba(151,187,205,1)",
         bezierCurve: false,
         data: [
-            {% for item in moisturevalues %}
+            {% for item in healthymoisturevalues %}
                         {{ item }},
     {% endfor %}]
                 }]
@@ -89,6 +57,38 @@
     max = 4000
     // draw bar chart
     var MoistureChart = new Chart(moisturechart).Line(moistureData, { scaleOverride: true, scaleSteps: steps, scaleStepWidth: Math.ceil(max / steps), scaleStartValue: 0, scaleShowVerticalLines: true, barShowStroke: true, scaleShowLabels: true });
+
+    ///////////////////////////////////////////////////////////////////
+    // Deceased Soil Moisture chart data
+    var deceasedmoistureData = {
+    labels: [
+        {% for item in ids %}
+    "{{ item }}",
+        {% endfor %}
+            ],
+
+    datasets: [{
+        fillColor: "rgba(151,187,205,0.2)",
+        strokeColor: "rgba(151,187,205,1)",
+        pointColor: "rgba(151,187,205,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(151,187,205,1)",
+        bezierCurve: false,
+        data: [
+            {% for item in deceasedmoisturevalues %}
+                        {{ item }},
+    {% endfor %}]
+                }]
+        }
+
+    // get bar chart canvas
+    var deceasedmoisturechart = document.getElementById("deceasedmoisture_graph").getContext("2d");
+
+    steps = 10
+    max = 4000
+    // draw bar chart
+    var deceasedMoistureChart = new Chart(deceasedmoisturechart).Line(deceasedmoistureData, { scaleOverride: true, scaleSteps: steps, scaleStepWidth: Math.ceil(max / steps), scaleStartValue: 0, scaleShowVerticalLines: true, barShowStroke: true, scaleShowLabels: true });
 
     ///////////////////////////////////////////////////////////////////
     // Temperature chart data
@@ -108,7 +108,7 @@
         pointHighlightStroke: "rgba(151,187,205,1)",
         bezierCurve: false,
         data: [
-            {% for item in tempvalues %}
+            {% for item in healthytempvalues %}
                         {{ item }},
     {% endfor %}]
                 }]
@@ -123,6 +123,40 @@
     var TemperatureChart = new Chart(temperaturechart).Line(temperatureData, { scaleOverride: true, scaleSteps: steps, scaleStepWidth: Math.ceil(max / steps), scaleStartValue: 0, scaleShowVerticalLines: true, barShowStroke: true, scaleShowLabels: true });
 
     /////////////////////////////////////////////////////////////////////
+
+    // Deceeased Temperature chart data
+    var deceasedtemperatureData = {
+        labels: [
+            {% for item in ids %}
+    "{{ item }}",
+        {% endfor %}
+            ],
+
+    datasets: [{
+        fillColor: "rgba(151,187,205,0.2)",
+        strokeColor: "rgba(151,187,205,1)",
+        pointColor: "rgba(151,187,205,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(151,187,205,1)",
+        bezierCurve: false,
+        data: [
+            {% for item in deceasedtempvalues %}
+                        {{ item }},
+    {% endfor %}]
+                }]
+        }
+
+    // get bar chart canvas
+    var deceasedtemperaturechart = document.getElementById("deceasedtemperature_graph").getContext("2d");
+
+    steps = 10
+    max = 60
+    // draw bar chart
+    var deceasedTemperatureChart = new Chart(deceasedtemperaturechart).Line(deceasedtemperatureData, { scaleOverride: true, scaleSteps: steps, scaleStepWidth: Math.ceil(max / steps), scaleStartValue: 0, scaleShowVerticalLines: true, barShowStroke: true, scaleShowLabels: true });
+
+    /////////////////////////////////////////////////////////////////////
+
     // humidity chart data
     var humidityData = {
         labels: [
@@ -140,7 +174,7 @@
         pointHighlightStroke: "rgba(151,187,205,1)",
         bezierCurve: false,
         data: [
-            {% for item in humidityvalues %}
+            {% for item in healthyhumidityvalues %}
                         {{ item }},
     {% endfor %}]
                 }]
@@ -154,9 +188,10 @@
     // draw bar chart
     var HumidityChart = new Chart(humiditychart).Line(humidityData, { scaleOverride: true, scaleSteps: steps, scaleStepWidth: Math.ceil(max / steps), scaleStartValue: 0, scaleShowVerticalLines: true, barShowStroke: true, scaleShowLabels: true });
 
+    /////////////////////////////////////////////////////////////////////
 
-    // co2 chart data
-    var co2Data = {
+    // deceasedhumidity chart data
+    var deceasedhumidityData = {
         labels: [
             {% for item in ids %}
     "{{ item }}",
@@ -172,53 +207,19 @@
         pointHighlightStroke: "rgba(151,187,205,1)",
         bezierCurve: false,
         data: [
-            {% for item in CO2values %}
-                        {{ item }},
-    {% endfor %}
-    ]
-            }]
-        }
-
-    // get bar chart canvas
-    var co2chart = document.getElementById("co2_graph").getContext("2d");
-
-    steps = 10
-    max = 1000
-    // draw bar chart
-    var Co2Chart = new Chart(co2chart).Line(co2Data, { scaleOverride: true, scaleSteps: steps, scaleStepWidth: Math.ceil(max / steps), scaleStartValue: 0, scaleShowVerticalLines: true, barShowStroke: true, scaleShowLabels: true });
-
-    //////////////////////////////////////////////////////////////
-
-    // TVOC chart data
-    var tvocData = {
-        labels: [
-            {% for item in ids %}
-    "{{ item }}",
-        {% endfor %}
-            ],
-
-    datasets: [{
-        fillColor: "rgba(151,187,205,0.2)",
-        strokeColor: "rgba(151,187,205,1)",
-        pointColor: "rgba(151,187,205,1)",
-        pointStrokeColor: "#fff",
-        pointHighlightFill: "#fff",
-        pointHighlightStroke: "rgba(151,187,205,1)",
-        bezierCurve: false,
-        data: [
-            {% for item in TVOCvalues %}
+            {% for item in deceasedhumidityvalues %}
                         {{ item }},
     {% endfor %}]
-            }]
+                }]
         }
 
     // get bar chart canvas
-    var tvocchart = document.getElementById("tvoc_graph").getContext("2d");
+    var deceasedhumiditychart = document.getElementById("deceasedhumidity_graph").getContext("2d");
 
     steps = 10
     max = 100
     // draw bar chart
-    var TvocChart = new Chart(tvocchart).Line(tvocData, { scaleOverride: true, scaleSteps: steps, scaleStepWidth: Math.ceil(max / steps), scaleStartValue: 0, scaleShowVerticalLines: true, barShowStroke: true, scaleShowLabels: true });
+    var deceasedHumidityChart = new Chart(deceasedhumiditychart).Line(deceasedhumidityData, { scaleOverride: true, scaleSteps: steps, scaleStepWidth: Math.ceil(max / steps), scaleStartValue: 0, scaleShowVerticalLines: true, barShowStroke: true, scaleShowLabels: true });
 
 </script>
 {% endblock content %}
