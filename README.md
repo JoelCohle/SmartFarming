@@ -7,8 +7,6 @@
 4. [Installation](#installation)
 5. [Usage](#usage)
 6. [Code Structure](#code-structure)
-7. [License](#license)
-8. [Contact](#contact)
 
 ## Introduction
 The Smart Farming Codebase enables the collection and monitoring of data from sensors deployed in a farming environment. The system gathers sensor data using Arduino-based microcontrollers and updates the collected values onto Thingspeak and Onem2m databases. Additionally, it provides a web-based dashboard built using Python Flask and a SQLite database for visualizing and analyzing the collected data.
@@ -54,8 +52,3 @@ The codebase is structured as follows:
 - `Dashboard/`: Includes the code for the web-based dashboard built using Python Flask and a SQLite database. This folder contains the necessary files and configurations for data processing, visualization, and user interface.
 
 Please refer to the individual folders and files for detailed documentation and comments.
-
-## License
-This codebase is released under the [MIT License](LICENSE).
-
-For further questions or inquiries, please contact [insert contact information here].
